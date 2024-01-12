@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 enum ButtonVariants {
   default = "bg-blue-700 hover:bg-blue-800",
   warning = "bg-yellow-400 hover:bg-yellow-600",
@@ -25,7 +27,11 @@ const Button: React.FC<ButtonProps> = ({
     <button
       {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
       ref={buttonRef as React.RefObject<HTMLButtonElement>}
-      className={`flex gap-3 items-center p-3 rounded-lg font-medium text-white leading-6 overflow-hidden min-w-28 disabled:opacity-60 disabled:cursor-not-allowed transition-colors ${additionalClasses} ${ButtonVariants[variant]}`}
+      className={twMerge(
+        "flex gap-3 items-center p-3 rounded-lg font-medium text-white leading-6 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed transition-colors",
+        additionalClasses,
+        ButtonVariants[variant]
+      )}
     >
       {children}
     </button>
