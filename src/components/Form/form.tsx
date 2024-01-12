@@ -17,7 +17,7 @@ type FormProps = {
 const Form = React.forwardRef<HTMLFormElement, FormProps>(
   ({ children, additionalClasses, ...props }, ref) => {
     return (
-      <form ref={ref} {...props} className={twMerge("p-3", additionalClasses)}>
+      <form ref={ref} {...props} className={twMerge("px-3", additionalClasses)}>
         {children}
       </form>
     );
@@ -32,7 +32,11 @@ type FormItemProps = {
 const FormItem = React.forwardRef<HTMLDivElement, FormItemProps>(
   ({ children, additionalClasses, ...props }, ref) => {
     return (
-      <div ref={ref} {...props} className={twMerge("py-3", additionalClasses)}>
+      <div
+        ref={ref}
+        {...props}
+        className={twMerge("py-3 flex flex-col gap-3", additionalClasses)}
+      >
         {children}
       </div>
     );
@@ -57,17 +61,19 @@ type FormInfoProps = {
 const FormInfo = React.forwardRef<HTMLParagraphElement, FormInfoProps>(
   ({ children, additionalClasses, variant = "default", ...props }, ref) => {
     return (
-      <p
-        ref={ref}
-        {...props}
-        className={twMerge(
-          "text-[16px] font-light leading-3",
-          additionalClasses,
-          FormInfoVariants[variant]
-        )}
-      >
-        {children}
-      </p>
+      <div>
+        <p
+          ref={ref}
+          {...props}
+          className={twMerge(
+            "text-[16px] font-light leading-3",
+            additionalClasses,
+            FormInfoVariants[variant]
+          )}
+        >
+          {children}
+        </p>
+      </div>
     );
   }
 );

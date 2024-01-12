@@ -18,7 +18,6 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ additionalClasses, label, ...props }, ref) => {
     return (
       <div className="flex gap-3 items-center">
-        {label && <label className="font-medium">{label}</label>}
         <input
           {...props}
           type="checkbox"
@@ -28,6 +27,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             additionalClasses
           )}
         />
+        {label && <label className="font-medium text-gray-900">{label}</label>}
       </div>
     );
   }
