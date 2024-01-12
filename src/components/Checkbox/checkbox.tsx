@@ -24,7 +24,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
           ref={ref}
           className={twMerge(
-            "w-6 h-6 rounded-md cursor-pointer",
+            "w-6 h-6 rounded-md cursor-pointer transition-colors border-gray-400 hover:border-gray-600",
             additionalClasses
           )}
         />
