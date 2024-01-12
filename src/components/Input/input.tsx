@@ -33,7 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
           className={twMerge(
-            "p-3 rounded-lg leading-6 border disabled:opacity-60 disabled:cursor-not-allowed transition-colors focus:border-hidden",
+            "p-3 rounded-lg leading-6 border disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none transition-colors hover:border-gray-400 focus:border-gray-400",
             additionalClasses
           )}
         />
