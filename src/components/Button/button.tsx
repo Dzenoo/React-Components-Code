@@ -1,3 +1,4 @@
+import React from "react";
 import { twMerge } from "tailwind-merge";
 
 enum ButtonVariants {
@@ -13,32 +14,26 @@ type ButtonProps = {
   children: React.ReactNode;
   variant: keyof typeof ButtonVariants;
   additionalClasses?: string;
-  buttonRef?: React.RefObject<HTMLButtonElement>;
 } & Omit<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "children" | "className" | "ref"
+  "children" | "className"
 >;
 
-const Button: React.FC<ButtonProps> = ({
-  children,
-  variant,
-  additionalClasses = "",
-  buttonRef,
-  ...props
-}) => {
-  return (
-    <button
-      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
-      ref={buttonRef as React.RefObject<HTMLButtonElement>}
-      className={twMerge(
-        "p-3 rounded-lg font-medium text-white leading-6 disabled:opacity-60 disabled:cursor-not-allowed transition-colors",
-        additionalClasses,
-        ButtonVariants[variant]
-      )}
-    >
-      {children}
-    </button>
-  );
-};
-
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, variant, additionalClasses = "", ...props }, ref) => {
+    return (
+      <button
+        {...props}
+        ref={ref}
+        className={twMerge(
+          "p-3 rounded-lg font-medium text-white leading-6 disabled:opacity-60 disabled:cursor-not-allowed transition-colors",
+          additionalClasses,
+          ButtonVariants[variant]
+        )}
+      >
+        {children}
+      </button>
+    );
+  }
+);
 export { Button };
