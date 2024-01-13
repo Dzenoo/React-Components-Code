@@ -13,7 +13,7 @@ enum SelectVariants {
   warning = "border-yellow-400 hover:border-yellow-600 text-yellow-700 focus:border-yellow-600",
 }
 
-type OptionsProps = {
+type OptionProps = {
   label: string;
   value: string | number;
 };
@@ -24,7 +24,7 @@ enum SelectHtmlAttributes {
 
 type SelectProps = {
   additionalClasses?: string;
-  options: OptionsProps[];
+  options: OptionProps[];
   label?: string;
   variant?: keyof typeof SelectVariants;
 } & Omit<
@@ -48,12 +48,13 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           {...props}
           className={twMerge(
-            "p-3 rounded-lg border cursor-pointer overflow-auto min-w-40 focus:outline-none text-gray-900 font-light leading-6 transition-colors hover:border-gray-400 focus:border-gray-400",
+            "p-3 rounded-lg border cursor-pointer overflow-auto min-w-40 focus:outline-none text-gray-900 font-light leading-6 transition-colors",
+            "hover:border-gray-400 focus:border-gray-400",
             additionalClasses,
             SelectVariants[variant]
           )}
         >
-          {options.map((option: OptionsProps) => (
+          {options.map((option: OptionProps) => (
             <option key={option.label} value={option.value}>
               {option.label}
             </option>

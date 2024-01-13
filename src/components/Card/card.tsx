@@ -23,17 +23,35 @@ type CardFooterProps = {
   children: React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
 
-const CardHeader: React.FC<CardHeaderProps> = ({ children, ...props }) => {
-  return <div {...props}>{children}</div>;
-};
+const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <div {...props} ref={ref}>
+        {children}
+      </div>
+    );
+  }
+);
 
-const CardFooter: React.FC<CardFooterProps> = ({ children, ...props }) => {
-  return <div {...props}>{children}</div>;
-};
+const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <div {...props} ref={ref}>
+        {children}
+      </div>
+    );
+  }
+);
 
-const CardContent: React.FC<CardContentProps> = ({ children, ...props }) => {
-  return <div {...props}>{children}</div>;
-};
+const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <div {...props} ref={ref}>
+        {children}
+      </div>
+    );
+  }
+);
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ children, additionalClasses = "", ...props }, ref) => {
