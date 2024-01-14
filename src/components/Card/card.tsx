@@ -6,20 +6,7 @@ enum CardHtmlAttributes {
   children = "children",
 }
 
-type CardProps = {
-  children: React.ReactNode;
-  additionalClasses?: string;
-} & Omit<React.HTMLAttributes<HTMLDivElement>, keyof typeof CardHtmlAttributes>;
-
 type CardHeaderProps = {
-  children: React.ReactNode;
-} & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
-
-type CardContentProps = {
-  children: React.ReactNode;
-} & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
-
-type CardFooterProps = {
   children: React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
 
@@ -33,6 +20,10 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
   }
 );
 
+type CardFooterProps = {
+  children: React.ReactNode;
+} & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
+
 const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
   ({ children, ...props }, ref) => {
     return (
@@ -43,6 +34,10 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
   }
 );
 
+type CardContentProps = {
+  children: React.ReactNode;
+} & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
+
 const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
   ({ children, ...props }, ref) => {
     return (
@@ -52,6 +47,11 @@ const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
     );
   }
 );
+
+type CardProps = {
+  children: React.ReactNode;
+  additionalClasses?: string;
+} & Omit<React.HTMLAttributes<HTMLDivElement>, keyof typeof CardHtmlAttributes>;
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
   ({ children, additionalClasses = "", ...props }, ref) => {

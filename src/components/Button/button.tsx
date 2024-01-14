@@ -1,6 +1,11 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
+enum ButtonHtmlAttributes {
+  className = "className",
+  children = "children",
+}
+
 enum ButtonVariants {
   default = "bg-indigo-700 hover:bg-indigo-900",
   warning = "bg-yellow-400 hover:bg-yellow-600",
@@ -16,7 +21,7 @@ type ButtonProps = {
   additionalClasses?: string;
 } & Omit<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
-  "children" | "className"
+  keyof typeof ButtonHtmlAttributes
 >;
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -36,4 +41,5 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
 export { Button };

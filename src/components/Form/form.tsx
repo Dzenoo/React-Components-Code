@@ -6,42 +6,40 @@ enum FormAttributes {
   children = "children",
 }
 
-type FormProps = {
+type FormProps<
+  T extends
+    | React.FormHTMLAttributes<HTMLFormElement>
+    | React.HTMLAttributes<HTMLDivElement>
+> = {
   children: React.ReactNode;
   additionalClasses?: string;
-} & Omit<
-  React.FormHTMLAttributes<HTMLFormElement>,
-  keyof typeof FormAttributes
->;
+} & Omit<T, keyof typeof FormAttributes>;
 
-const Form = React.forwardRef<HTMLFormElement, FormProps>(
-  ({ children, additionalClasses, ...props }, ref) => {
-    return (
-      <form ref={ref} {...props} className={twMerge("px-3", additionalClasses)}>
-        {children}
-      </form>
-    );
-  }
-);
+const Form = React.forwardRef<
+  HTMLFormElement,
+  FormProps<React.FormHTMLAttributes<HTMLFormElement>>
+>(({ children, additionalClasses, ...props }, ref) => {
+  return (
+    <form ref={ref} {...props} className={twMerge("px-3", additionalClasses)}>
+      {children}
+    </form>
+  );
+});
 
-type FormItemProps = {
-  children: React.ReactNode;
-  additionalClasses?: string;
-} & Omit<React.HTMLAttributes<HTMLDivElement>, keyof typeof FormAttributes>;
-
-const FormItem = React.forwardRef<HTMLDivElement, FormItemProps>(
-  ({ children, additionalClasses, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        {...props}
-        className={twMerge("py-3 flex flex-col gap-3", additionalClasses)}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+const FormItem = React.forwardRef<
+  HTMLDivElement,
+  FormProps<React.HTMLAttributes<HTMLDivElement>>
+>(({ children, additionalClasses, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      {...props}
+      className={twMerge("py-3 flex flex-col gap-3", additionalClasses)}
+    >
+      {children}
+    </div>
+  );
+});
 
 enum FormInfoVariants {
   default = "text-gray-900",

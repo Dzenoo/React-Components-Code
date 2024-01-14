@@ -20,7 +20,6 @@ enum InputTypeAttributes {
   color = "color",
   password = "password",
   date = "date",
-  radio = "radio",
 }
 
 enum InputHtmlAttributes {
