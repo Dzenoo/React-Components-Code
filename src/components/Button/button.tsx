@@ -1,11 +1,6 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-enum ButtonHtmlAttributes {
-  className = "className",
-  children = "children",
-}
-
 enum ButtonVariants {
   default = "bg-indigo-700 hover:bg-indigo-900",
   warning = "bg-yellow-400 hover:bg-yellow-600",
@@ -18,21 +13,17 @@ enum ButtonVariants {
 type ButtonProps = {
   children: React.ReactNode;
   variant: keyof typeof ButtonVariants;
-  additionalClasses?: string;
-} & Omit<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  keyof typeof ButtonHtmlAttributes
->;
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children">;
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, variant, additionalClasses = "", ...props }, ref) => {
+  ({ children, variant, className, ...props }, ref) => {
     return (
       <button
         {...props}
         ref={ref}
         className={twMerge(
           "p-3 rounded-lg font-medium text-white leading-6 disabled:opacity-60 disabled:cursor-not-allowed transition-colors",
-          additionalClasses,
+          className,
           ButtonVariants[variant]
         )}
       >

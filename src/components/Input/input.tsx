@@ -22,22 +22,14 @@ enum InputTypeAttributes {
   date = "date",
 }
 
-enum InputHtmlAttributes {
-  className = "className",
-}
-
 type InputProps = {
-  additionalClasses?: string;
   type?: keyof typeof InputTypeAttributes;
   label?: string;
   variant?: keyof typeof InputVariants;
-} & Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  keyof typeof InputHtmlAttributes
->;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "children">;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ additionalClasses, label, type, variant = "default", ...props }, ref) => {
+  ({ label, type, variant = "default", className, ...props }, ref) => {
     return (
       <div className="flex flex-col gap-[0.6em]">
         {label && (
@@ -51,7 +43,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
           className={twMerge(
             "p-3 rounded-lg leading-6 font-light border disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none transition-colors",
-            additionalClasses,
+            className,
             InputVariants[variant]
           )}
         />

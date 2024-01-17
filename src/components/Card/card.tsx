@@ -1,11 +1,6 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-enum CardHtmlAttributes {
-  className = "className",
-  children = "children",
-}
-
 type CardHeaderProps = {
   children: React.ReactNode;
 } & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
@@ -50,17 +45,16 @@ const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
 
 type CardProps = {
   children: React.ReactNode;
-  additionalClasses?: string;
-} & Omit<React.HTMLAttributes<HTMLDivElement>, keyof typeof CardHtmlAttributes>;
+} & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, additionalClasses = "", ...props }, ref) => {
+  ({ children, className, ...props }, ref) => {
     return (
       <div
         {...props}
         className={twMerge(
           "rounded-md p-3 shadow-md bg-white overflow-auto flex flex-col gap-3",
-          additionalClasses
+          className
         )}
         ref={ref}
       >

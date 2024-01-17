@@ -18,25 +18,14 @@ type OptionProps = {
   value: string | number;
 };
 
-enum SelectHtmlAttributes {
-  className = "className",
-}
-
 type SelectProps = {
-  additionalClasses?: string;
   options: OptionProps[];
   label?: string;
   variant?: keyof typeof SelectVariants;
-} & Omit<
-  React.SelectHTMLAttributes<HTMLSelectElement>,
-  keyof typeof SelectHtmlAttributes
->;
+} & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "children">;
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  (
-    { additionalClasses, options, label, variant = "default", ...props },
-    ref
-  ) => {
+  ({ options, label, variant = "default", className, ...props }, ref) => {
     return (
       <div className="flex flex-col gap-[0.6em]">
         {label && (
@@ -50,7 +39,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           className={twMerge(
             "p-3 rounded-lg border cursor-pointer overflow-auto min-w-40 focus:outline-none text-gray-900 font-light leading-6 transition-colors",
             "hover:border-gray-400 focus:border-gray-400",
-            additionalClasses,
+            className,
             SelectVariants[variant]
           )}
         >
