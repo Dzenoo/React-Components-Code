@@ -2,9 +2,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 type FormProps<
-  T extends
-    | React.FormHTMLAttributes<HTMLFormElement>
-    | React.HTMLAttributes<HTMLDivElement>
+  T extends React.FormHTMLAttributes<HTMLFormElement> = React.FormHTMLAttributes<HTMLFormElement>
 > = {
   children: React.ReactNode;
 } & Omit<T, "children">;
@@ -20,9 +18,15 @@ const Form = React.forwardRef<
   );
 });
 
+type FormItemProps<
+  T extends React.HTMLAttributes<HTMLDivElement> = React.HTMLAttributes<HTMLDivElement>
+> = {
+  children: React.ReactNode;
+} & Omit<T, "children">;
+
 const FormItem = React.forwardRef<
   HTMLDivElement,
-  FormProps<React.HTMLAttributes<HTMLDivElement>>
+  FormItemProps<React.HTMLAttributes<HTMLDivElement>>
 >(({ className, children, ...props }, ref) => {
   return (
     <div

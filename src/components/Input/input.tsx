@@ -12,7 +12,6 @@ enum InputVariants {
   danger = "border-red-400 hover:border-red-600 text-red-700 focus:border-red-600",
   warning = "border-yellow-400 hover:border-yellow-600 text-yellow-700 focus:border-yellow-600",
 }
-
 enum InputTypeAttributes {
   number = "number",
   file = "file",
@@ -20,6 +19,7 @@ enum InputTypeAttributes {
   color = "color",
   password = "password",
   date = "date",
+  email = "email",
 }
 
 type InputProps = {
